@@ -1,0 +1,30 @@
+name: CI
+on: push
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - project: builder-buildkit
+          - project: builder-circleci
+    steps:
+      - uses: actions/checkout@v3
+      - uses: depot/setup-action@v1
+      - uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: depot/build-push-action@v1
+        with:
+          context: ./${{ matrix.project }}
+          tags: ghcr.io/depot/${{ matrix.project }}:${{ github.sha }}
+          platforms: linux/amd64,linux/arm64

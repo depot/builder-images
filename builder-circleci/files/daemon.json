@@ -1,0 +1,15 @@
+{
+  "data-root": "/data/docker",
+  "experimental": true,
+  "default-address-pools": [{ "base": "10.100.0.1/16", "size": 24 }],
+  "log-level": "warn",
+  "features": {
+    "buildkit": true
+  },
+  "hosts": ["unix:///var/run/docker.sock"],
+  "mtu": 1400,
+  "max-concurrent-downloads": 10,
+  "max-concurrent-uploads": 5,
+  "metrics-addr": "0.0.0.0:9323",
+  "tls": false
+}

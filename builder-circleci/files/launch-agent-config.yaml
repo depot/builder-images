@@ -1,0 +1,5 @@
+runner:
+  command_prefix: ["sudo", "-niHu", "circleci", "--"]
+  working_directory: /data/circleci/%s
+  cleanup_working_directory: true
+  disable_auto_update: true
