@@ -103,7 +103,12 @@ ARG COMPOSE_SWITCH_VERSION=1.0.5
 RUN \
   apt-get update && \
   apt-get install --yes --no-install-recommends docker-compose-plugin=${COMPOSE_VER}~ubuntu-$( lsb_release -cs ) && \
-  curl -fL https://github.com/docker/compose-switch/releases/download/v${COMPOSE_SWITCH_VERSION}/docker-compose-linux-amd64 -o /usr/local/bin/compose-switch && \
+  case "$(uname -m)" in \
+  aarch64) arch='arm64' ;; \
+  x86_64) arch='amd64' ;; \
+  *) echo >&2 "error: unsupported architecture: $(uname -m)"; exit 1 ;; \
+  esac && \
+  curl -fL https://github.com/docker/compose-switch/releases/download/v${COMPOSE_SWITCH_VERSION}/docker-compose-linux-$arch -o /usr/local/bin/compose-switch && \
   docker compose version && \
   chmod +x /usr/local/bin/compose-switch && \
   update-alternatives --install /usr/local/bin/docker-compose docker-compose /usr/local/bin/compose-switch 99 && \
