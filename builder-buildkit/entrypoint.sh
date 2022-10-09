@@ -12,4 +12,4 @@ if ! [ -f /var/lib/buildkit/.formatted ]; then
   touch /var/lib/buildkit/.formatted
 fi
 
-exec buildkitd "$@"
+exec /usr/bin/machine-agent start
