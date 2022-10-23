@@ -10,7 +10,7 @@ COPY --from=moby/buildkit:v0.10.4 /usr/bin/build* /usr/bin/
 RUN \
   mkdir -p /tmp/machine-agent && \
   cd /tmp/machine-agent && \
-  curl -sLo machine-agent.tar.gz https://dl.depot.dev/machine-agent/download/linux/$(uname -m)/v0.0.14 && \
+  curl -sLo machine-agent.tar.gz https://dl.depot.dev/machine-agent/download/linux/$(uname -m)/v0.0.18 && \
   tar -xzf machine-agent.tar.gz && \
   mv bin/machine-agent /usr/bin/ && \
   rm -rf /tmp/machine-agent
