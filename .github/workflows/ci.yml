@@ -18,7 +18,7 @@ jobs:
           - project: builder-buildkit
           - project: builder-circleci
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: depot/setup-action@v1
       - uses: docker/metadata-action@v4
         id: meta
